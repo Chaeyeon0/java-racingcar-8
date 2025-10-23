@@ -12,14 +12,15 @@ public class InputView {
     public static int readTryCount() {
         System.out.println("시도할 횟수는 몇 회인가요?");
         String input = Console.readLine();
+        int count;
         try {
-            int count = Integer.parseInt(input);
-            if (count < 1) {
-                throw new IllegalArgumentException("시도 횟수는 1 이상이어야 합니다");
-            }
-            return count;
+            count = Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("시도 횟수는 숫자여야 합니다.");
         }
+        if (count < 1) {
+            throw new IllegalArgumentException("시도 횟수는 1 이상이어야 합니다.");
+        }
+        return count;
     }
 }
