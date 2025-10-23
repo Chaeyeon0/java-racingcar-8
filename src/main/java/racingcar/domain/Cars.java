@@ -37,9 +37,4 @@ public class Cars {
                 .filter(car -> car.getDistance() == maxDistance)
                 .collect(Collectors.toList());
     }
-
-    public void printStatus() {
-        cars.forEach(System.out::println);
-        System.out.println();
-    }
 }
