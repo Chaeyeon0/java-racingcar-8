@@ -78,4 +78,32 @@ class CarsTest {
                 .extracting(Car::getName)
                 .containsExactlyInAnyOrder("pobi", "jun");
     }
+
+    @Test
+    @DisplayName("입력값이 null이거나 공백이면 예외를 발생시킨다")
+    void throwsExceptionWhenInputIsNullOrBlank() {
+        assertThatThrownBy(() -> new Cars(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력이 비어");
+
+        assertThatThrownBy(() -> new Cars("   "))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력이 비어");
+    }
+
+    @Test
+    @DisplayName("쉼표로 구분된 이름이 모두 공백이거나 빈 문자열이면 예외를 발생시킨다")
+    void throwsExceptionWhenAllNamesAreEmpty() {
+        assertThatThrownBy(() -> new Cars(" , , "))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("유효한 자동차 이름이 없습니다");
+    }
+
+    @Test
+    @DisplayName("쉼표만 입력된 경우 예외를 발생시킨다")
+    void throwsExceptionWhenOnlyCommasProvided() {
+        assertThatThrownBy(() -> new Cars(",,"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("유효한 자동차 이름이 없습니다");
+    }
 }

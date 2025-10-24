@@ -3,17 +3,27 @@ package racingcar.domain;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Cars {
+
     private final List<Car> cars;
 
     //쉼표로 구분된 이름 문자열을 받아서 Car 리스트로 변환
     public Cars(String namesInput) {
+
+        if (namesInput == null || namesInput.isBlank()) {
+            throw new IllegalArgumentException("자동차 이름 입력이 비어 있습니다.");
+        }
+
         this.cars = Arrays.stream(namesInput.split(","))
                 .map(String::trim)
-                .map(Car::new)  // Car 생성자에서 이름 검증 수행
-                .collect(Collectors.toList());
+                .filter(name -> !name.isEmpty()) // 빈 이름 제거
+                .map(Car::new)
+                .toList();
+
+        if (cars.isEmpty()) {
+            throw new IllegalArgumentException("유효한 자동차 이름이 없습니다.");
+        }
     }
 
     //모든 자동차를 한 번씩 이동
@@ -35,6 +45,6 @@ public class Cars {
 
         return cars.stream()
                 .filter(car -> car.getDistance() == maxDistance)
-                .collect(Collectors.toList());
+                .toList();
     }
 }
