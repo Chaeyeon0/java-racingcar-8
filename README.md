@@ -21,6 +21,7 @@ java-racingcar
  │   ├── Car.java                    // 자동차 (이름 + 이동 거리 + 전진 로직)
  │   ├── Cars.java                   // 자동차 전체 이동, 우승자 판별)
  │   ├── MovementStrategy.java       // 전진 조건 인터페이스
+ │   ├── RacingGame.java             // 경주 실행 및 게임 관리 
  │   └── RandomMovementStrategy.java // 랜덤 이동 전략 구현체
  │
  └── view
@@ -90,7 +91,7 @@ java-racingcar
 - [x]  `Cars` 객체 생성 및 이동 로직 실행
 - [x]  각 라운드 결과 출력 (`OutputView`)
 - [x]  최종 우승자 출력 (`OutputView`)
-
+-> 컨트롤러의 책임을 분리하기 위해 RacingGame 클래스를 추가하였습니다!
 ---
 
 ### 6️⃣ 애플리케이션 진입점 (Application)
@@ -111,7 +112,7 @@ GameController
    ↓
 InputView  → 사용자 입력
    ↓
-Cars (전체 로직)
+RacingGame → Cars 관리 및 이동 로직 실행
    ↓
 Car (개별 전진 판단)
    ↓
