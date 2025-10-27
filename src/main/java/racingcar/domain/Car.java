@@ -20,8 +20,8 @@ public class Car {
         }
     }
 
-    public void move(MovementStrategy strategy) {
-        if (strategy.isMovable()) {
+    public void attemptMove(MovementStrategy strategy) {
+        if (strategy.shouldMove()) {
             distance++;
         }
     }

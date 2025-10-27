@@ -37,7 +37,7 @@ class CarsTest {
         // 항상 이동하는 전략
         cars.moveAll(new MovementStrategy() {
             @Override
-            public boolean isMovable() {
+            public boolean shouldMove() {
                 return true;
             }
         });
@@ -53,10 +53,10 @@ class CarsTest {
         Cars cars = new Cars("pobi, jun, woni");
 
         // pobi 두 번 이동, jun 한 번 이동, woni 정지
-        cars.getCars().get(0).move(() -> true);
-        cars.getCars().get(0).move(() -> true);
-        cars.getCars().get(1).move(() -> true);
-        cars.getCars().get(2).move(() -> false);
+        cars.getCars().get(0).attemptMove(() -> true);
+        cars.getCars().get(0).attemptMove(() -> true);
+        cars.getCars().get(1).attemptMove(() -> true);
+        cars.getCars().get(2).attemptMove(() -> false);
 
         List<Car> winners = cars.findWinners();
         assertThat(winners)
@@ -70,8 +70,8 @@ class CarsTest {
         Cars cars = new Cars("pobi, jun, woni");
 
         // pobi와 jun을 동일하게 한 칸씩 이동
-        cars.getCars().get(0).move(() -> true);
-        cars.getCars().get(1).move(() -> true);
+        cars.getCars().get(0).attemptMove(() -> true);
+        cars.getCars().get(1).attemptMove(() -> true);
 
         List<Car> winners = cars.findWinners();
         assertThat(winners)

@@ -1,10 +1,10 @@
 package racingcar.domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class CarTest {
 
@@ -30,9 +30,9 @@ class CarTest {
         Car car = new Car("pobi");
 
         // 항상 이동하는 전략
-        car.move(new MovementStrategy() {
+        car.attemptMove(new MovementStrategy() {
             @Override
-            public boolean isMovable() {
+            public boolean shouldMove() {
                 return true;
             }
         });
@@ -46,9 +46,9 @@ class CarTest {
         Car car = new Car("pobi");
 
         // 절대 이동하지 않는 전략
-        car.move(new MovementStrategy() {
+        car.attemptMove(new MovementStrategy() {
             @Override
-            public boolean isMovable() {
+            public boolean shouldMove() {
                 return false;
             }
         });
@@ -62,9 +62,9 @@ class CarTest {
         Car car = new Car("pobi");
 
         // 한 칸 이동시키기
-        car.move(new MovementStrategy() {
+        car.attemptMove(new MovementStrategy() {
             @Override
-            public boolean isMovable() {
+            public boolean shouldMove() {
                 return true;
             }
         });
